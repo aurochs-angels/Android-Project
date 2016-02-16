@@ -32,40 +32,40 @@ public class secondActivity extends AppCompatActivity implements View.OnClickLis
     SharedPreferences.Editor prefEditor;
     String send;
     SharedPreferences prefGet;
+    SharedPreferences prefPut1;
+    SharedPreferences.Editor prefEditor1;
+    SharedPreferences prefGet1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        // retrive the current time
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
         Date date = new Date();
         dateText = dateFormat.format(date);
+        // 2 edittext objects and 2 textview objects
         distance = (EditText) findViewById(R.id.distance);
         volume = (EditText) findViewById(R.id.volume);
         warning2=(TextView) findViewById(R.id.warning2);
         warning3=(TextView) findViewById(R.id.warning3);
+        // 2 butttons
         add=(Button)findViewById(R.id.add);
         add.setOnClickListener(this);
         back=(Button)findViewById(R.id.back);
         back.setOnClickListener(this);
+        // create 2 shared preferences
         prefPut = getSharedPreferences("data2",
                 Activity.MODE_PRIVATE);
         prefEditor = prefPut.edit();
         send="";
         prefGet = getSharedPreferences("data2", Activity.MODE_PRIVATE);
-        highest=prefGet.getFloat("highest", 0);
-        System.out.println(highest);
-        //set= new LinkedHashSet<String>();
-        //prefGet = getSharedPreferences("data2", Activity.MODE_PRIVATE);
-       // store=prefGet.getStringSet(dateText, null);
-/*
-        if(store==null){
-            set= new LinkedHashSet<String>();
-        }else{
-            set=store;
-        } */
-
-
-
+        prefPut1 = getSharedPreferences("data3",
+                Activity.MODE_PRIVATE);
+        prefEditor1 = prefPut1.edit();
+        // get date
+        prefGet1 = getSharedPreferences("data3", Activity.MODE_PRIVATE);
+        // assign the latest distance input to variable highest
+        highest=prefGet1.getFloat("limit",0);
 
 
     }
@@ -73,35 +73,37 @@ public class secondActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.add:
-
+            // I take the distance and volume input from the user
                 String distanceText = distance.getText().toString();
                 String volumeText = volume.getText().toString();
-
+            // check if the inputs are number or not
                 if(!checkValidity(distanceText)){
                     warning2.setText("Your distance is not valid");
                 }
                 if(!checkValidity(volumeText)){
                     warning3.setText("Your volume is not valid");
-                }
+                }//If they are number then I calculate
                 if(checkValidity(distanceText)&& checkValidity(volumeText)){
                     warning2.setText("");
                     warning3.setText("");
-                    Float input=Float.parseFloat(distanceText);
-                    send= dateText+" "+distanceText+" "+volumeText+" ";
-                    if(input>=highest){
-                        System.out.println(highest);
-                        System.out.println(input);
-                        highest=input;
-                        System.out.println(prefGet.getFloat("nana", 0));
-                        prefEditor.putFloat("highest", highest);
+                    //get the distance value
+                    Float inputDistance=Float.parseFloat(distanceText);
+                    // check if the current distance input is greater than the previous one
+                    if(inputDistance>=highest){
+                        // add input including date, distance , volume to 1 string
+                        send= dateText+" " + distanceText+" "+volumeText+" ";
+                        // save send message to key
+                        prefEditor.putString("key", send);
                         prefEditor.commit();
-                        System.out.println(prefGet.getFloat("nana", 0));
-                        prefEditor.putString("key",send);
-                        prefEditor.commit();
+                        // save current limit of distance value
+                        prefEditor1.putFloat("limit",inputDistance);
+                        prefEditor1.commit();
+                        finish();
+
                     }else{
-                        warning2.setText("Your new odometer value must be higher than the last one");
+                        warning2.setText("Your new odometer value must be higher than the last one: "+String.valueOf(highest));
                     }
-                    finish();
+
                 }
                 break;
             case R.id.back:
@@ -109,7 +111,7 @@ public class secondActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
-
+    // check if the input is number
     public boolean isNumber( String input ) {
         try
         {
@@ -122,7 +124,7 @@ public class secondActivity extends AppCompatActivity implements View.OnClickLis
         }
 
     }
-
+    // check if the input is number and positive
     public boolean checkValidity(String input){
         if (!isNumber(input)){
             return false;

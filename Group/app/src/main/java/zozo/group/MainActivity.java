@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefGet = getSharedPreferences("data2", Activity.MODE_PRIVATE);
+        //retrieve the date stored the last time
         store=prefGet.getString("database", "");
         receive="";
-
         prefPut = getSharedPreferences("data2",
                 Activity.MODE_PRIVATE);
         prefEditor = prefPut.edit();
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        receptFunc();
+        receiveData();
         calculate();
 
     }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void receptFunc(){
+    public void receiveData(){
         receive=prefGet.getString("key","");
         if(!receive.isEmpty()){
             store+=receive;
@@ -95,25 +95,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void calculate(){
+        // get string storing everything
         store=prefGet.getString("database","");
+        // calculate the number of elements in the list
             int size=0;
             String[] list=store.split(" ");
             for(String a:list){
                 size++;
             }
+        // if the number of elements is greater than 6 which means that the user added at least 2 times
         if(size>=6){
+            // create arraylists to store date, distance, volume separately
             ArrayList<Double> result=new ArrayList<>();
             ArrayList<Double> distance=new ArrayList<>();
             ArrayList<Double> volume=new ArrayList<>();
             ArrayList<String> date=new ArrayList<>();
 
-
+            // retrieve the input from the stored string
             for(int i=0; i<list.length-2; i+=3){
                 date.add(list[i]);
                 distance.add(Double.parseDouble(list[i+1]));
                 volume.add(Double.parseDouble(list[i+2]));
             }
-
+            // calculate the volume of gas for 1 km between every 2 times that users refuel and add them to the arraylist result
             for(int i=0; i<distance.size()-1;i++){
                 double value=volume.get(i)/(distance.get(i+1)-distance.get(i));
                 result.add(value);
@@ -121,11 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DecimalFormat df = new DecimalFormat("#.##");
             String showLatest=String.valueOf(df.format(result.get(result.size()-1)));
             Collections.sort(result);
+            //calculate the average
             double sum=0;
             for(double e:result){
                 sum+=e;
             }
             double average=sum/result.size();
+            // show result
             String showHighest=String.valueOf(df.format(result.get(result.size()-1)));
             String showAverage=String.valueOf(df.format(average));
             String Lowest=String.valueOf(df.format(result.get(0)));

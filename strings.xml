@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Gas Log</string>
+    <string name="addButton">Add</string>
+    <string name="historyButton">History</string>
+    <string name="odometer">Odometer reading</string>
+    <string name="km">Kilometer</string>
+    <string name="volume">Volume</string>
+    <string name="liter">Liter</string>
+    <string name="backButton">Back</string>
+    <string name="date">Date</string>
+    <string name="clearButton">Clear</string>
+    <string name="mpg">MPG</string>
+</resources>

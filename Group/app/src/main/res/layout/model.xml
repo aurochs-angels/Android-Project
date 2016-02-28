@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
     <TextView android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +19,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
-        android:text="fsa"
+        android:text="@string/date"
         />
 
     <TextView android:id="@+id/distance"
@@ -22,9 +28,11 @@
         android:layout_weight="1"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="sdfads"
+        android:text="@string/km"
 
         />
+
+
     <TextView android:id="@+id/volume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,8 +40,31 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
-        android:text="saf"
+        android:text="@string/liter"
 
         />
 
-</LinearLayout>
+    <TextView android:id="@+id/mpg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:text="@string/mpg"
+
+        />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clearButton"
+        android:id="@+id/clear"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
+
+

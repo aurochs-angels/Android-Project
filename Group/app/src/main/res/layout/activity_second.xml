@@ -11,12 +11,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Distance"/>
+        android:text="@string/odometer"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kilometer"
+        android:hint="@string/km"
         android:id="@+id/distance" />
     <TextView
         android:layout_width="match_parent"
@@ -26,12 +26,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Volume"/>
+        android:text="@string/volume"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/volume"
-        android:hint="Litter"/>
+        android:hint="@string/liter"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,13 +41,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
-        android:text="Add"
+        android:text="@string/addButton"
         android:id="@+id/add"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:text="Back"
+        android:text="@string/backButton"
         android:id="@+id/back"/>
 
 

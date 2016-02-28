@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="zozo.gas.MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -21,35 +21,37 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="100dp"
-
             android:id="@+id/latest"/>
         <TextView
 
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="100dp"
-            android:id="@+id/highest"/>
+            android:id="@+id/highest"
+            android:layout_below="@id/latest"
+            android:layout_alignParentRight="true"/>
         <TextView
 
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="100dp"
-
-            android:id="@+id/average"/>
+            android:id="@+id/average"
+            android:layout_below="@id/latest"
+            android:layout_alignParentLeft="true"/>
         <TextView
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="100dp"
-
-            android:id="@+id/lowest"/>
-    </LinearLayout>
+            android:id="@+id/lowest"
+            android:layout_below="@id/average"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,13 +60,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="@string/addButton"
             android:id="@+id/act2"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="History"
+            android:text="@string/historyButton"
             android:layout_alignParentBottom="true"
             android:id="@+id/act3"/>
     </LinearLayout>
